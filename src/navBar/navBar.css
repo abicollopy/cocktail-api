@@ -33,9 +33,10 @@
 .NavButton:hover{
     background-color: #37393A;
     text-decoration: underline;
+    color: #81B29A;
 }
 
 .body{
     background-color: #F4F1DE;
-    min-height: 700px;
+    min-height: 600px;
 }

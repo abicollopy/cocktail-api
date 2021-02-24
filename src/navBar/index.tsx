@@ -18,7 +18,7 @@ export default () => {
   return (
     <Router>
       <div className="NavBar">
-        <Link to="/home" className="NavText">New Website!</Link>
+        <Link to="/home" className="NavText">Cocktail Generator</Link>
         <div className="NavButtonContainer">
           {
                 Pages.map(({ url, title }) => {
