@@ -6,11 +6,14 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import HomePage from './Home';
+import RandomPage from './RandomCocktail';
+import IngredientPage from './IngredientList';
 
 const Pages = [
-  { url: '/home', title: 'Home' },
-  { url: '/random', title: 'Random' },
-  { url: '/ingredients', title: 'Ingredients' },
+  { url: '/home', title: 'Home', component: HomePage },
+  { url: '/random', title: 'Random', component: RandomPage },
+  { url: '/ingredients', title: 'Ingredients', component: IngredientPage },
 ];
 
 export default () => {
@@ -32,11 +35,11 @@ export default () => {
       </div>
       <Switch>
         {
-            Pages.map(({ url, title }) => {
+            Pages.map(({ url, component: Component }) => {
               console.log('HI');
               return (
                 <Route path={url}>
-                  <div className="body">{title}</div>
+                  <Component />
                 </Route>
               );
             })
