@@ -1,0 +1,54 @@
+.SearchContainer{
+    display: block;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 60px;
+}
+
+.SearchBar{
+    display: inline-block;
+    min-width: 90%;
+}
+
+.SearchButton{
+    display: inline-block;
+    min-width: calc(10% - 5px);
+    margin-left: 5px;
+}
+
+.SwitchingButtonContainer{
+    display: block;
+    margin-right: calc(50% - 130px);
+    margin-left: calc(50% - 130px);
+    margin-top: 10px;
+}
+
+.ActiveButton{
+    background-color: #E07A5F;
+    line-height: 25px;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 10px 10px 10px;
+    color: white;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.InactiveButton{
+    background-color: #F2CC8F;
+    line-height: 25px;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 10px 10px 10px;
+    color: white;
+    height: 25px;
+    margin-right: 10px;
+}

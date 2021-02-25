@@ -16,38 +16,29 @@ const Pages = [
   { url: '/ingredients', title: 'Ingredients', component: IngredientPage },
 ];
 
-export default () => {
-  console.log('HI');
-  return (
-    <Router>
-      <div className="NavBar">
-        <Link to="/home" className="NavText">Cocktail Generator</Link>
-        <div className="NavButtonContainer">
-          {
-                Pages.map(({ url, title }) => {
-                  console.log('HI');
-                  return (
-                    <Link to={url} className="NavButton">{title}</Link>
-                  );
-                })
-            }
-        </div>
-      </div>
-      <Switch>
+export default () => (
+  <Router>
+    <div className="NavBar">
+      <Link to="/home" className="NavText">Cocktail Generator</Link>
+      <div className="NavButtonContainer">
         {
-            Pages.map(({ url, component: Component }) => {
-              console.log('HI');
-              return (
-                <Route path={url}>
-                  <Component />
-                </Route>
-              );
-            })
+          Pages.map(({ url, title }) => (
+            <Link key={title} to={url} className="NavButton">{title}</Link>
+          ))
         }
-        <Route path="/">
-          <div className="body">Home</div>
-        </Route>
-      </Switch>
-    </Router>
-  );
-};
+      </div>
+    </div>
+    <Switch>
+      {
+        Pages.map(({ url, component: Component }) => (
+          <Route key={url} path={url}>
+            <Component />
+          </Route>
+        ))
+      }
+      <Route path="/">
+        <HomePage />
+      </Route>
+    </Switch>
+  </Router>
+);
