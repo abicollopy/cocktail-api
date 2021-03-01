@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './randomCocktail.css';
 
 const apiRandomEndpoint = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
@@ -6,6 +7,13 @@ const searchRandom = async () => {
   const response = await fetch(apiRandomEndpoint);
   const responseJson = await response.json();
   return responseJson;
+};
+
+const searchFunction = (stateResetFn:any) => {
+  searchRandom().then((responseJson) => {
+    const { drinks: [drinkInfo] } = responseJson;
+    stateResetFn(drinkInfo);
+  });
 };
 
 interface DrinkInfoModel {
@@ -50,17 +58,29 @@ export default () => {
     strDrink = '', strInstructions = '', strDrinkThumb = '',
   } = responseDrinkInfo || {};
   useEffect(() => {
-    searchRandom().then((responseJson) => {
-      const { drinks: [drinkInfo] } = responseJson;
-      setResponseDrinkInfo(drinkInfo);
-    });
+    searchFunction(setResponseDrinkInfo);
   }, []);
   return (
     <div>
-      {strDrink}
-      <br />
-      {strInstructions}
-      <img src={strDrinkThumb} alt="" />
+      <div>
+        {strDrink}
+        <br />
+        {strInstructions}
+        <img src={strDrinkThumb} alt="" />
+      </div>
+      <div
+        className="GenerateNewButton"
+        role="button"
+        tabIndex={0}
+        onClick={() => {
+          searchFunction(setResponseDrinkInfo);
+        }}
+        onKeyDown={() => {
+          searchFunction(setResponseDrinkInfo);
+        }}
+      >
+        Generate New
+      </div>
     </div>
   );
 };

@@ -1,0 +1,17 @@
+.GenerateNewButton{
+    background-color: #E07A5F;
+    line-height: 25px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 10px 10px 10px;
+    color: white;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.GenerateNewButton:hover{
+    background-color: #F2CC8F;
+}
