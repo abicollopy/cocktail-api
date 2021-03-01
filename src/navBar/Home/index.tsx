@@ -4,29 +4,59 @@ import React, { useState } from 'react';
 import './home.css';
 
 const apiSearchEndpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?';
+const apiFilterEndpoint = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?';
 
-const searchForIngredient = async (searchValue: string, searchTerm: string) => {
-  const endpoint = `${apiSearchEndpoint}${searchTerm}=${searchValue}`;
+const searchForCocktails = async (searchValue: string, searchTerm: string) => {
+  const useSearch = searchTerm === 's' ? apiSearchEndpoint : apiFilterEndpoint;
+  const endpoint = `${useSearch}${searchTerm}=${searchValue}`;
   const response = await fetch(endpoint);
   const responseJson = await response.json();
   return responseJson;
 };
 
-interface IngredientInfoModel {
-  idIngredient: string;
-  strABV: string;
-  strAlcohol: string;
-  strDescription: string;
-  strIngredient: string;
+interface DrinkInfoModel {
+  strDrink: string;
+  strInstructions: string;
+  strDrinkThumb: string;
+  strIngredient1: string;
+  strIngredient2: string;
+  strIngredient3: string;
+  strIngredient4: string;
+  strIngredient5: string;
+  strIngredient6: string;
+  strIngredient7: string;
+  strIngredient8: string;
+  strIngredient9: string;
+  strIngredient10: string;
+  strIngredient11: string;
+  strIngredient12: string;
+  strIngredient13: string;
+  strIngredient14: string;
+  strIngredient15: string;
+  strMeasure1: string;
+  strMeasure2: string;
+  strMeasure3: string;
+  strMeasure4: string;
+  strMeasure5: string;
+  strMeasure6: string;
+  strMeasure7: string;
+  strMeasure8: string;
+  strMeasure9: string;
+  strMeasure10: string;
+  strMeasure11: string;
+  strMeasure12: string;
+  strMeasure13: string;
+  strMeasure14: string;
+  strMeasure15: string;
 }
 
 export default () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('s');
-  const [responseIngredientInfo, setResponseIngredientInfo] = useState<IngredientInfoModel>();
+  const [responseDrinksInfo, setResponseDrinksInfo] = useState<DrinkInfoModel>();
   const {
-    strABV = '', strDescription = '', strIngredient = '',
-  } = responseIngredientInfo || {};
+    strDrink = '', strInstructions = '', strDrinkThumb = '',
+  } = responseDrinksInfo || {};
   return (
     <>
       <div>
@@ -43,9 +73,9 @@ export default () => {
             className="SearchButton"
             type="submit"
             onClick={() => {
-              searchForIngredient(searchValue, searchTerm).then((responseJson) => {
-                const { ingredients: [ingredientInfo] } = responseJson;
-                setResponseIngredientInfo(ingredientInfo);
+              searchForCocktails(searchValue, searchTerm).then((responseJson) => {
+                const { drinks: [drinksInfo] } = responseJson;
+                setResponseDrinksInfo(drinksInfo);
               });
             }}
           >
@@ -72,14 +102,12 @@ export default () => {
         </div>
       </div>
       {
-          responseIngredientInfo && (
+          responseDrinksInfo && (
             <div>
-              {strIngredient}
+              {strDrink}
               <br />
-              It has an ABV of&nbsp;
-              {strABV}
-              <br />
-              {strDescription}
+              {strInstructions}
+              <img src={strDrinkThumb} alt="" />
             </div>
           )
         }
