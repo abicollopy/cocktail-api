@@ -53,10 +53,7 @@ interface DrinkInfoModel {
 export default () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('s');
-  const [responseDrinksInfo, setResponseDrinksInfo] = useState<DrinkInfoModel>();
-  const {
-    strDrink = '', strInstructions = '', strDrinkThumb = '',
-  } = responseDrinksInfo || {};
+  const [responseDrinksInfo, setResponseDrinksInfo] = useState<DrinkInfoModel[]>([]);
   return (
     <>
       <div>
@@ -74,8 +71,8 @@ export default () => {
             type="submit"
             onClick={() => {
               searchForCocktails(searchValue, searchTerm).then((responseJson) => {
-                const { drinks: [drinksInfo] } = responseJson;
-                setResponseDrinksInfo(drinksInfo);
+                const { drinks } = responseJson;
+                setResponseDrinksInfo(drinks);
               });
             }}
           >
@@ -101,16 +98,18 @@ export default () => {
           </div>
         </div>
       </div>
-      {
-          responseDrinksInfo && (
+      <div>
+        {
+          responseDrinksInfo.map(({ strDrink, strInstructions, strDrinkThumb }) => (
             <div>
               {strDrink}
               <br />
               {strInstructions}
               <img src={strDrinkThumb} alt="" />
             </div>
-          )
+          ))
         }
+      </div>
     </>
   );
 };
